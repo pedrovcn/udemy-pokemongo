@@ -22,21 +22,22 @@ class PokemonPersistance {
 
     func createAll() {
         create(name: "Abra",        imageName: "abra",          captured: false)
-        create(name: "Bellsprout",  imageName: "bullbasaur",    captured: true)
+        create(name: "Bulbasaur",   imageName: "bullbasaur",    captured: false)
+        create(name: "Bellsprout",  imageName: "bellsprout",    captured: false)
         create(name: "Caterpie",    imageName: "caterpie",      captured: false)
-        create(name: "Charmander",  imageName: "charmander",    captured: true)
-        create(name: "Dratini",     imageName: "dratini",       captured: true)
-        create(name: "Eevee",       imageName: "eevee",         captured: true)
+        create(name: "Charmander",  imageName: "charmander",    captured: false)
+        create(name: "Dratini",     imageName: "dratini",       captured: false)
+        create(name: "Eevee",       imageName: "eevee",         captured: false)
         create(name: "Jigglypuff",  imageName: "jigglypuff" ,   captured: false)
         create(name: "Mankey",      imageName: "mankey",        captured: false)
         create(name: "Meowth",      imageName: "meowth",        captured: false)
-        create(name: "Mew",         imageName: "mew",           captured: true)
+        create(name: "Mew",         imageName: "mew",           captured: false)
         create(name: "Pidgey",      imageName: "pidgey",        captured: false)
-        create(name: "Pikachu",     imageName: "pikachu-2",     captured: true)
+        create(name: "Pikachu",     imageName: "pikachu-2",     captured: false)
         create(name: "Psyduck",     imageName: "psyduck",       captured: false)
         create(name: "Rattata",     imageName: "rattata",       captured: false)
         create(name: "Snorlax",     imageName: "snorlax",       captured: false)
-        create(name: "Squirtle",    imageName: "squirtle",      captured: true)
+        create(name: "Squirtle",    imageName: "squirtle",      captured: false)
         create(name: "Venonat", 	imageName: "venonat",       captured: false)
         create(name: "Weedle", 	    imageName: "weedle",        captured: false)
         create(name: "Zubat",       imageName: "zubat",         captured: false)
@@ -87,6 +88,15 @@ class PokemonPersistance {
 
         return []
 
+    }
 
+    func save(pokemon: Pokemon) {
+        if let context = getContext() {
+            pokemon.captured = true
+
+            do {
+                try context.save()
+            } catch { }
+        }
     }
 }

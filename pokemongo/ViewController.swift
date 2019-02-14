@@ -99,7 +99,6 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                     annotationView.image = UIImage(named: imageName)
                 }
             }
-//            annotationView.image = #imageLiteral(resourceName: "pikachu-2")
         }
         
         var frame = annotationView.frame
@@ -109,6 +108,30 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         annotationView.frame = frame
 
         return annotationView
+    }
+
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        let annotation = view.annotation
+
+        mapView.deselectAnnotation(annotation, animated: true)
+
+        if annotation is MKUserLocation { return }
+
+        if let annotationCoordinate = annotation?.coordinate {
+            let region = MKCoordinateRegionMakeWithDistance(annotationCoordinate, 200, 200)
+            mapView.setRegion(region, animated: true)
+        }
+
+        Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { (timer) in
+            if let userCoordinate = self.locationManager.location?.coordinate {
+                if MKMapRectContainsPoint(mapView.visibleMapRect, MKMapPointForCoordinate(userCoordinate)) {
+                    let pokemon = (annotation as! PokemonAnnotation).pokemon
+                    self.pokemonPersistence.save(pokemon: pokemon)
+                } else {
+                    print("You are far away from the Pokemon. Aproach it and try again")
+                }
+            }
+        }
     }
 }
 
