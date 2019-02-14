@@ -14,6 +14,8 @@
 		E3322D9C2211E16E00656326 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E3322D9B2211E16E00656326 /* Assets.xcassets */; };
 		E3322D9F2211E16E00656326 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3322D9D2211E16E00656326 /* LaunchScreen.storyboard */; };
 		E3322DA82211E17900656326 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3322DA72211E17900656326 /* MapKit.framework */; };
+		E3617C272215C5E300454F91 /* PokemonAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3617C262215C5E300454F91 /* PokemonAnnotation.swift */; };
+		E3617C292215CD8E00454F91 /* PokedexViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3617C282215CD8E00454F91 /* PokedexViewController.swift */; };
 		E39B3A6B221328E100F4DDC8 /* PokemonPersistance.swift in Sources */ = {isa = PBXBuildFile; fileRef = E39B3A6A221328E100F4DDC8 /* PokemonPersistance.swift */; };
 /* End PBXBuildFile section */
 
@@ -27,6 +29,8 @@
 		E3322D9E2211E16E00656326 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E3322DA02211E16E00656326 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E3322DA72211E17900656326 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		E3617C262215C5E300454F91 /* PokemonAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonAnnotation.swift; sourceTree = "<group>"; };
+		E3617C282215CD8E00454F91 /* PokedexViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokedexViewController.swift; sourceTree = "<group>"; };
 		E39B3A6A221328E100F4DDC8 /* PokemonPersistance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonPersistance.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -70,6 +74,8 @@
 				E3322DA02211E16E00656326 /* Info.plist */,
 				E3322D982211E16D00656326 /* pokemongo.xcdatamodeld */,
 				E39B3A6A221328E100F4DDC8 /* PokemonPersistance.swift */,
+				E3617C262215C5E300454F91 /* PokemonAnnotation.swift */,
+				E3617C282215CD8E00454F91 /* PokedexViewController.swift */,
 			);
 			path = pokemongo;
 			sourceTree = "<group>";
@@ -156,6 +162,8 @@
 				E3322D9A2211E16D00656326 /* pokemongo.xcdatamodeld in Sources */,
 				E39B3A6B221328E100F4DDC8 /* PokemonPersistance.swift in Sources */,
 				E3322D942211E16D00656326 /* ViewController.swift in Sources */,
+				E3617C292215CD8E00454F91 /* PokedexViewController.swift in Sources */,
+				E3617C272215C5E300454F91 /* PokemonAnnotation.swift in Sources */,
 				E3322D922211E16D00656326 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

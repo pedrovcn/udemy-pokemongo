@@ -52,23 +52,41 @@ class PokemonPersistance {
         }
     }
 
-    func addAll() -> [Pokemon] {
-        let context = getContext()
+    func getAll() -> [Pokemon] {
+        if let context = getContext() {
+            do {
+                if let pokemon = try context.fetch(Pokemon.fetchRequest()) as? [Pokemon] {
 
-        do {
-            if let pokemon = try context?.fetch(Pokemon.fetchRequest()) as? [Pokemon] {
+                    if pokemon.count == 0 {
+                        self.createAll()
+                        return getAll()
+                    }
 
-                if pokemon.count == 0 {
-                    self.createAll()
-                    return addAll()
+                    return pokemon
+
                 }
-
-                return pokemon
-            }
-
-
-        } catch { }
+            } catch { }
+        }
 
         return []
+    }
+
+    func get(captured: Bool) -> [Pokemon] {
+        if let context = getContext() {
+
+            let request = Pokemon.fetchRequest() as NSFetchRequest<Pokemon>
+            request.predicate = NSPredicate(format: "captured=%d", captured)
+
+            do {
+                let pokemon = try context.fetch(request)
+                return pokemon
+            } catch {
+                print("Could not retrive the captured Pokemon. A Carvanha may be chewing the connection cable right now. Wait for the fix.")
+            }
+        }
+
+        return []
+
+
     }
 }
