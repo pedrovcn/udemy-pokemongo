@@ -111,27 +111,41 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     }
 
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        let annotation = view.annotation
+        if let annotation = view.annotation {
 
-        mapView.deselectAnnotation(annotation, animated: true)
+            mapView.deselectAnnotation(annotation, animated: true)
 
-        if annotation is MKUserLocation { return }
+            if annotation is MKUserLocation { return }
 
-        if let annotationCoordinate = annotation?.coordinate {
+            let annotationCoordinate = annotation.coordinate
             let region = MKCoordinateRegionMakeWithDistance(annotationCoordinate, 200, 200)
             mapView.setRegion(region, animated: true)
-        }
 
-        Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { (timer) in
-            if let userCoordinate = self.locationManager.location?.coordinate {
-                if MKMapRectContainsPoint(mapView.visibleMapRect, MKMapPointForCoordinate(userCoordinate)) {
-                    let pokemon = (annotation as! PokemonAnnotation).pokemon
-                    self.pokemonPersistence.save(pokemon: pokemon)
-                } else {
-                    print("You are far away from the Pokemon. Aproach it and try again")
+            let pokemon = (annotation as! PokemonAnnotation).pokemon
+
+            Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { (timer) in
+                if let userCoordinate = self.locationManager.location?.coordinate {
+                    if MKMapRectContainsPoint(mapView.visibleMapRect, MKMapPointForCoordinate(userCoordinate)) {
+                        self.pokemonPersistence.save(pokemon: pokemon)
+                        self.mapView.removeAnnotation(annotation)
+
+                        self.present(self.createAlert(title: "Parabéns", message: "Você capturou o Pokémon \(pokemon.name!)"), animated: true)
+
+                    } else {
+                        self.present(self.createAlert(title: "Alerta", message: "Você precisa se aproximar mais para capturar o \(pokemon.name!)"), animated: true)
+                        print("You are far away from the Pokemon. Aproach it and try again")
+                    }
                 }
             }
         }
+    }
+
+    func createAlert(title: String, message: String) -> UIAlertController {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let ok = UIAlertAction(title: "Ok", style: .default, handler: nil)
+        alertController.addAction(ok)
+
+        return alertController
     }
 }
 
